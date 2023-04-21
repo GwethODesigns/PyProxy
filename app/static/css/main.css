@@ -1,3 +1,29 @@
 body {
-    background-color: blue;
+    background-color: rgb(38, 175, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div {
+    position: relative;
+    margin: auto;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: calc(100% + 26px);
+    margin-top: 15%;
+}
+
+input[type=url] {
+    width: 600px;
+    height: 40px;
+    font-size: 30px;
+    padding: 5px;
+}
+
+input[type=submit] {
+    position: absolute;
+    margin-left: 5px;
+    width: 52px;
+    height: 52px;
 }

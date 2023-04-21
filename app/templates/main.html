@@ -3,10 +3,15 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Hi</title>
+        <title>Py Proxy</title>
         <link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div>
+            <form action="{{ url_for('proxyRedirect') }}">
+                <input type="url" name="url" placeholder="https://google.com">
+                <input type="submit" value="Go!">
+            </form>
+        </div>
     </body>
 </html>
