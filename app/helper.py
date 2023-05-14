@@ -5,10 +5,9 @@ import requests_html, requests, io
 
 def find_list_resources (tag: str, attribute: str, soup: BeautifulSoup):
    list = {}
-   for x in soup.findAll(tag):
+   for x in soup.find_all(tag):
        try:
-            _ = x[attribute]
-            list[x] = attribute
+            list[x] = attribute, x[attribute]
        except KeyError:
            pass
     
@@ -55,6 +54,7 @@ def processSite(soup: BeautifulSoup, url: str):
 
     # JS SRC
     scripts = find_list_resources('script', 'src', soup)
+    print(scripts)
     for script, _ in scripts.items():
         if script["src"].startswith('https://') or script["src"].startswith('http://'):
             script["src"] = f'/main/_js/{script["src"]}'
@@ -79,6 +79,15 @@ def processSite(soup: BeautifulSoup, url: str):
         else:
             link["href"] = f'/main/_{linkType}/{get_host(url)}{link["href"]}'
 
+    # A HREF
+    alinks = find_list_resources('a', 'href', soup)
+    for a, _ in alinks.items():
+        if a["href"].startswith('https://') or a["href"].startswith('http://'):
+            a["href"] = f'/main/{a["href"]}'
+        else:
+            a["href"] = f'/main/{get_host(url)}{a["href"]}'
+
+        
     return soup
     
 

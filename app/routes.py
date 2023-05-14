@@ -10,6 +10,9 @@ from bs4 import BeautifulSoup as bs
 def index(request: Request):
     return templates.TemplateResponse('main.html', {'request': request})
 
+
+
+
 @app.get('/main/_rd', response_class=RedirectResponse)
 def proxyRedirect(url: str = 'https://www.google.com'):
     url = url if url != '' else 'https://www.google.com'
@@ -30,9 +33,10 @@ def CSSProxy(url: str):
     return Response(r.content)
 
 @app.get('/main/_txt/{url:path}')
-def JavaScriptProxy(url: str):
+def TextProxy(url: str):
     r = requests.get(url)
     return Response(r.content)
+
 
 @app.get('/main/{url:path}', response_class=Response)
 async def proxy(url: str):
@@ -49,7 +53,6 @@ async def proxy(url: str):
     await r.html.arender()
     soup = bs(r.text, "html.parser")
 
-    
     soup = processSite(soup, url)
 
     return soup.prettify()
